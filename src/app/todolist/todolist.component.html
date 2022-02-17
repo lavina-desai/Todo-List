@@ -1,0 +1,61 @@
+<a  class="btn btn-warning" routerLink = "/">
+  <span class="glyphicon glyphicon-arrow-left"></span> Back 
+</a>
+
+<h1>{{name}}</h1>
+<form class="form-horizontal" #form="ngForm" (ngSubmit)=" submitForm(form.value);newTodo.value= '';newTodoDate.value='';newTodoMessage.value='' " >  
+  <div class="form-group">
+    <label class="control-label col-sm-2 ">Task Description :</label> 
+    <div class="col-sm-10">
+      <input type= "text"  #newTodo required  ngModel  name="title" placeholder="Enter the title"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Expiry Date :</label>
+    <div class="col-sm-10"> 
+      <input  class="glyphicon glyphicon-calendar" type= "date" #newTodoDate name="date" ngModel required placeholder="DD/MM/YYYY"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2">Users :</label>
+    <div class="col-sm-10">
+      <input type= "text" name="message" ngModel required #newTodoMessage placeholder="Enter the message"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-6 col-sm-10">
+      <button type="submit" style="width:9%;"class="btn btn-success btn-lg">Submit</button>
+    </div>
+  </div>
+</form>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <tr class="info">
+        <!-- <th>Id</th> -->
+        <th>Task Description</th>
+        <th>Expiry Date</th>
+        <th>Users</th>
+        <th>Delete</th>
+        <th>Edit</th>
+      </tr>
+      <tr *ngFor="let todo of todos; let i = index" [attr.data-index]="i">
+        <!-- <td>{{i + 1}}</td> -->
+        <td>{{todo.title}}</td>
+        <td>{{todo.date | date }}</td>
+        <td>{{todo.message}}</td>
+        <td>
+          <button  class="btn btn-danger " (click)="deleteTodo(todo)">
+             <span class="glyphicon glyphicon-remove"></span> Delete
+          </button>    
+        </td>
+        <td>
+          <button  class="btn btn-primary " (click)="editTodo(i)">
+             <span class="glyphicon glyphicon-edit"></span> Edit
+          </button>
+        </td>
+        <!-- <td><a (click)="editTodo(i)">Edit</a></td> -->
+      </tr>
+    </table>
+  </div>
+</div>
